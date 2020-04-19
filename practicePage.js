@@ -24,3 +24,4 @@ console.log(fox.reportStats());
 //another change has been made
 //test # 2
 //test number 3
+//test #4
