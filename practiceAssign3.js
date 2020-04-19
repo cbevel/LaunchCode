@@ -16,21 +16,27 @@ class Command {
     }
     this.value = value;
   }
-
 }
 
 
 class Rover {
-    constructor (position, mode = NORMAL, generatorWatts = 110) {
+    constructor (position, mode = 'NORMAL', generatorWatts = 110) {
       this.position = position;
       this.mode = mode;
       this.generatorWatts = generatorWatts;
       }
-  
     receiveMessage(message) {
-      
-
-     return response;
-    }
-        
+     return message;        
   }
+}
+
+  let commands = [new Command('MODE_CHANGE'), new Command('STATUS_CHECK')];
+  let message = new Message('Test message with two commands', commands);  
+  let rover = new Rover(2000);
+
+
+
+
+  rover.receiveMessage()
+
+
