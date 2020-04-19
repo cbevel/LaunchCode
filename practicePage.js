@@ -19,9 +19,3 @@ class Astronaut {
 
 let fox = new Astronaut ("fox", 7, 12);
 console.log(fox.reportStats());
-
-//this is a test. this is another test.
-//another change has been made
-//test # 2
-//test number 3
-//test #4
