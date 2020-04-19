@@ -64,26 +64,47 @@ let newMessage = new Message('book', commands);
 assert.strictEqual(newMessage.commands,commands);
 });
 
-
-//this is closing the entire test//
 });
+
+
+
+
+
 
 //rover.spec.js
 const assert = require('assert');
 const Rover = require('../rover.js');
+const Message = require('../message.js');
+const Command = require('../command.js');
 
-describe ('rover', function (){
+describe ('Rover Class', function (){
+  
+  //test 7//
+  it ("constructor sets position and default values for mode and generatorWatts", function() {
+    let newRover = new Rover(98382);
+    assert.strictEqual(newRover.position, 98382);
+    assert.strictEqual(newRover.mode, "NORMAL");
+    assert.strictEqual(newRover.generatorWatts, 110);
+  });
 
-//test 7//
+  //test 8//
+
+  it ("response returned by receiveMessage contains name of message", function() {
+    let commands = [new Command('MODE_CHANGE'), new Command('STATUS_CHECK')];
+    let message = new Message('Status Test', commands);
+    let newRover = new Rover(98382);
+    let response = newRover.receiveMessage(message).message;
+      assert.strictEqual(response, message.name);
+  });
 
 
-
-
-
-
-
-//this closes the whole test//
 });
+
+
+
+
+
+
 
 //command.js
 
@@ -100,6 +121,10 @@ class Command {
   
   module.exports = Command;
 
+
+
+
+
   //message.js
   class Message {
     constructor(name, commands) {
@@ -114,10 +139,25 @@ class Command {
   
   module.exports = Message; 
 
+
+
+
+
+
+
+
   //rover.js
-  class Rover {
-    constructor ()
+class Rover {
+  constructor (position, mode = 'NORMAL', generatorWatts = 110) {
+    this.position = position;
+    this.mode = mode;
+    this.generatorWatts = generatorWatts;
+    }
+
+  receiveMessage(message) {
+    return message; 
+    
   }
-  
-  module.exports = Rover;
+}
+module.exports = Rover;
 
