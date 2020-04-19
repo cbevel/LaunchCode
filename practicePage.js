@@ -19,8 +19,4 @@ class Astronaut {
 
 let fox = new Astronaut ("fox", 7, 12);
 console.log(fox.reportStats());
-
-
-//adding another test
-//adding a test
-//trying again
+        
