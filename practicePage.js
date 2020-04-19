@@ -19,3 +19,6 @@ class Astronaut {
 
 let fox = new Astronaut ("fox", 7, 12);
 console.log(fox.reportStats());
+
+//this is a test. this is another test.
+//another change has been made
