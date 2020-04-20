@@ -97,6 +97,24 @@ describe ('Rover Class', function (){
       assert.strictEqual(response, message.name);
   });
 
+  //test 9 //
+
+  it ("response returned by receiveMessage includes two results if two commands are sent in the message", function() {
+    let commands = [new Command('MODE_CHANGE'), new Command('STATUS_CHECK')];
+    let message = new Message('Status Test', commands);
+    let newRover = new Rover(98382);
+    let response = newRover.receiveMessage(message).results.length;
+    assert.strictEqual(response, 2);
+  });
+
+//test 10//
+it ("responds correctly to status check command", function() {
+   let commands = [new Command('MODE_CHANGE'), new Command('STATUS_CHECK')];
+    let message = new Message('Status Test', commands);
+    let newRover = new Rover(98382);
+
+});
+
 
 });
 
@@ -154,10 +172,19 @@ class Rover {
     this.generatorWatts = generatorWatts;
     }
 
-  receiveMessage(message) {
-    return message; 
-    
+    receiveMessage(message) {
+      let response = {
+      message: message.name,
+      results: []
   }
-}
+
+  for (let i =0; i < message.commands.length; i++) {
+    if (message.commands[i].commandType) {
+    response.results.push({completed: true});
+    }
+  }
+   return response;
+    }
+  }
 module.exports = Rover;
 
