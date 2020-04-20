@@ -33,8 +33,21 @@ class Rover {
     }  
     
     for (let i =0; i < message.commands.length; i++) {
-    if (message.commands[i].commandType) {
-    response.results.push({completed: true});
+    // if (message.commands[i].commandType) {}
+      let roverStatus2 = {  
+          mode: this.mode,
+          generatorWatts: this.generatorWatts, 
+          position: this.position
+      };
+
+    if (message.commands[i].commandType === 'STATUS_CHECK') {
+    
+      response.results.push ({
+        completed: true,  
+        roverStatus: roverStatus2
+    })
+    }    else {
+      response.results.push({completed: true});
     }
   }
    return response;
