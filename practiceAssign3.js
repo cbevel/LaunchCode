@@ -27,10 +27,19 @@ class Rover {
       }
 
     receiveMessage(message) {
-      let Message = {};
-      
+     let response = {
+      message: message.name,
+      results: []
+    }  
+    
+    for (let i =0; i < message.commands.length; i++) {
+    if (message.commands[i].commandType) {
+    response.results.push({completed: true});
+    }
   }
-}
+   return response;
+    }
+  }
 
 let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
 let message = new Message('Test message with two commands', commands);
