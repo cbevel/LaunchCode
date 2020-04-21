@@ -27,26 +27,31 @@ class Rover {
       }
 
     receiveMessage(message) {
-     let response = {
-      message: message.name,
-      results: []
-    }  
-    
-    for (let i =0; i < message.commands.length; i++) {
-    // if (message.commands[i].commandType) {}
-      let roverStatus2 = {  
-          mode: this.mode,
-          generatorWatts: this.generatorWatts, 
-          position: this.position
-      };
+      let response = {
+        message: message.name,
+        results: []
 
-    if (message.commands[i].commandType === 'STATUS_CHECK') {
+      }  
     
-      response.results.push ({
-        completed: true,  
-        roverStatus: roverStatus2
-    })
-    }    else {
+      for (let i =0; i < message.commands.length; i++) {
+    
+      if (message.commands[i].commandType === 'STATUS_CHECK') {
+    
+          response.results.push ({
+            completed: true,  
+            roverStatus: { 
+              mode: this.mode,
+              generatorWatts: this.generatorWatts,
+              position: this.position
+            }
+          });
+
+    }   if (message.commands[i].commandType === 'MODE_CHANGE'){
+      this.mode = "LOW_POWER";
+      this.position = 0;
+   }
+    
+    else {
       response.results.push({completed: true});
     }
   }
@@ -54,11 +59,11 @@ class Rover {
     }
   }
 
-let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
+let commands = [new Command('MODE_CHANGE', 'LOW_POWER')];
+// new Command('STATUS_CHECK')];
 let message = new Message('Test message with two commands', commands);
 let rover = new Rover(98382);    // Passes 98382 as the rover's position.
 let response = rover.receiveMessage(message);
-
 console.log(response);
 
 
