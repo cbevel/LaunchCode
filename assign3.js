@@ -107,13 +107,48 @@ describe ('Rover Class', function (){
     assert.strictEqual(response, 2);
   });
 
-//test 10//
-it ("responds correctly to status check command", function() {
-   let commands = [new Command('MODE_CHANGE'), new Command('STATUS_CHECK')];
-    let message = new Message('Status Test', commands);
-    let newRover = new Rover(98382);
 
-});
+  //Test 10 --  For the STATUS_CHECK command, receiveMessage(message).results includes a roverStatus object describing the current state of the rover object --- mode, generatorWatts, and position. The test should check each of these for accuracy//
+
+
+  it ("responds correctly to status check command", function() {
+    let commands = [new Command('STATUS_CHECK')];
+     let message = new Message('Status Test', commands);
+     let newRover = new Rover(98382);
+     let response = newRover.receiveMessage(message).results[0];
+     let correctOutput = {
+         completed: true, 
+         roverStatus: {
+         mode: 'NORMAL', 
+         generatorWatts: 110, 
+         position: 98382
+         }
+       }
+       assert.deepEqual(response,correctOutput);
+ });
+ 
+ //test 11//
+ 
+ it("responds correctly to mode change command", function() {
+   let commands = [new Command('MODE_CHANGE', 'LOW_POWER')];
+   let message = new Message('Mode Change', commands);
+   let newRover = new Rover(98382);
+   let response = newRover.receiveMessage(message);
+   assert.strictEqual(newRover.mode,'LOW_POWER');
+   assert.strictEqual(response.results[0].completed, true);
+ });
+ 
+ //test 12//
+ it ("responds with false completed value when attempting to move in LOW_POWER mode", function() {
+ let commands = [new Command('MODE_CHANGE', 'LOW_POWER')];
+   let message = new Message('Mode Change', commands);
+   let newRover = new Rover(98382);
+   let response = newRover.receiveMessage(message);
+   assert.strictEqual(newRover.mode, "LOW_POWER");
+   assert.strictEqual(newRover.position, 92382);
+   assert.strictEqual(response.results[0].completed, false);
+ });
+ 
 
 
 });
@@ -165,26 +200,51 @@ class Command {
 
 
   //rover.js
-class Rover {
-  constructor (position, mode = 'NORMAL', generatorWatts = 110) {
-    this.position = position;
-    this.mode = mode;
-    this.generatorWatts = generatorWatts;
-    }
-
-    receiveMessage(message) {
+  class Rover {
+    constructor (position, mode = 'NORMAL', generatorWatts = 110) {
+      this.position = position;
+      this.mode = mode;
+      this.generatorWatts = generatorWatts;
+      }
+  
+      receiveMessage(message) {
       let response = {
-      message: message.name,
-      results: []
-  }
-
-  for (let i =0; i < message.commands.length; i++) {
-    if (message.commands[i].commandType) {
-    response.results.push({completed: true});
+        message: message.name,
+        results: []
+        }
+  
+          for (let i =0; i < message.commands.length; i++) {
+            
+            if (message.commands[i].commandType === 'MODE_CHANGE'){
+                this.mode = 'LOW_POWER';
+                this.position = 0;
+                response.results.push({completed: true});              
+                }
+  
+            else if (message.commands[i].commandType === 'MODE_CHANGE'){
+                this.mode = 'LOW_POWER';    
+                response.results.push({completed: false});              
+            }
+          
+                  
+            if (message.commands[i].commandType === 'STATUS_CHECK') {
+                response.results.push ({
+                  completed: true,  
+                  roverStatus: 
+                  {
+                    mode: this.mode, 
+                    generatorWatts: this.generatorWatts, 
+                    position: this.position}});
+            
+             
+            } else {
+              response.results.push({completed: true});
+  
+                  }
+                }
+          return response;
+        }
     }
-  }
-   return response;
-    }
-  }
-module.exports = Rover;
-
+  
+  
+  module.exports = Rover;
