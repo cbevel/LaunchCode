@@ -40,9 +40,9 @@ class Rover {
           response.results.push ({
             completed: true,  
             roverStatus: { 
-              mode: this.mode,
-              generatorWatts: this.generatorWatts,
-              position: this.position
+              "mode": this.mode,
+              "generatorWatts": this.generatorWatts,
+              "position": this.position
             }
           });
 
