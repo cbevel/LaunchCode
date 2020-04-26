@@ -66,5 +66,7 @@ let rover = new Rover(98382);    // Passes 98382 as the rover's position.
 let response = rover.receiveMessage(message);
 console.log(response);
 
+// added a comment
+
 
 
