@@ -67,6 +67,60 @@
 <button>Send Report</button>
 </form>
 
+<form action="">
+
+    <label for="Email">Email
+        <input type="email" name="emailAddress"/>
+    </label>
+
+    <label for="Report Date">Report Date
+        <input type="date" name="reportDate" id="reportDate"/>
+    </label>
+
+    <label for="Crew Count">Crew Count
+        <input type="number" name="crewCount" id="crewCount" min="1" max="10"/>
+    </label>
+    <button>Send Report</button>
+    <label for="Crew">Crew
+        <input type="checkbox" name="crewReady" id="crewReady"/>
+    </label>
+
+
+    <div>Activities</div>
+    <label>cooking<input type="checkbox" name="cooking"/></label>
+    <label>running<input type="checkbox" name="running"/></label>
+    <label>movies<input type="checkbox" name="movies"/></label>
+
+    <div>Ingredients</div>
+<label>Onion<input type="checkbox" name="ingredient" value="onion"/></label>
+<label>Butter<input type="checkbox" name="ingredient" value="butter"/></label>
+<label>Rice<input type="checkbox" name="ingredient" value="rice"/></label>
+
+</form>
+
+<!-- radio buttons -->
+<form action="">
+    Flight Rating:
+    <label>Rough<input type="radio" name="flightRating" value="rough"/></label>
+    <label>Few Bumps<input type="radio" name="flightRating" value="fewBumps"/></label>
+    <label>Smooth<input type="radio" name="flightRating" value="smooth"/></label>
+    <button>Send Report</button>
+
+
+    <div>
+        <label for="Operation Code">Operation Code
+            <select name="Operation" id="operationCode">
+                <option value="">* Select One*</option>
+                <option value="1">Simulations</option>
+                <option value="2">Rocket Tests</option>
+                <option value="3">Crew Related</option>
+            </select>
+        </label>
+    </div>
+ </form>
+
+
+
 
 </body>
 
