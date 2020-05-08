@@ -1,0 +1,165 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+   <title>Mouseover Event</title>
+   <script>
+         window.addEventListener("load", function() {
+            let list = document.getElementById("lane-list");
+            list.addEventListener("mouseover", function (event) {
+               let element = event.target;
+               element.innerHTML += ">";
+               console.log("target", element);
+            });
+         });
+   </script>
+</head>
+<body>
+   Mouseover Race
+   <ul id="lane-list">
+         <li>Lane 1</li>
+         <li>Lane 2</li>
+         <li>Lane 3</li>
+   </ul>
+</body>
+</html>
+Example HTML Output (if the mouse is moved over elements in the list)
+
+Mouseover Race
+
+   Lane 1>>>>>>>
+   Lane 2>>>>>>>>>>>>
+   Lane 3>>>>>>>>
+
+
+
+
+
+
+
+
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+   <title>Window Load Event</title>
+   <script>
+      // add load event handler to window
+      window.addEventListener("load", function() {
+          // put DOM code here to ensure elements have been loaded
+          console.log('window loaded');
+
+          let ring = document.getElementById("ring-button");
+          ring.addEventListener("click", function (event) {
+              console.log("ring ring");
+          });
+
+          let knock = document.getElementById("knock-button");
+          knock.addEventListener("click", function (event) {
+              console.log("knock knock");
+          });
+      });
+   </script>
+</head>
+<body>
+   <div id="toolbar">
+      <button id="ring-button">Ring Bell</button>
+      <button id="knock-button">Knock on Door</button>
+   </div>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+      <html>
+      <head>
+            <title>Button click handler</title>
+      </head>
+      <body>
+         <h1>Ring the Doorbell</h1>
+         <p id="main-text" class="orange" style="font-weight: bold;">
+               a bunch of really valuable text...
+         </p>
+         <button id="ring-button">Ring Bell</button>
+         <button id="greet-button">Greet Friends</button>
+         <button id="knock-knock">Knock Knock</button>
+         <button id="Wax-on">Wax On</button>
+        
+         <script> //functions//
+           function knockKnock () {
+             document.getElementById("main-text").innerHTML += "Who's there?";
+             console.log("Who's there?");
+           }
+            function youRang() {
+               document.getElementById("main-text").innerHTML += "you rang...";
+               console.log("you rang...");
+            }
+            function greetFriends(){
+            document.getElementById("main-text").innerHTML += "Hello Friends!";
+            console.log("Hello Friends!");
+            }
+             function waxOn() {
+                 document.getElementById("main-text").innerHTML += "Wax Off!";
+                 console.log("Wax off!");
+             }
+
+            // Obtain a reference to the button element
+            let ring_button = document.getElementById("ring-button");
+            // Set named function youRang as the click event handler
+            ring_button.addEventListener("click", youRang);
+
+            let greet_Friends = document.getElementById ("greet-button");
+            greet_Friends.addEventListener("click", greetFriends);
+
+            let knock_knock = document.getElementById("knock-knock");
+            knock_knock.addEventListener("click", knockKnock);
+
+            let wax_on = document.getElementById("Wax-on");
+            wax_on.addEventListener("click", waxOn);
+
+         </script>
+      </body>
+      </html>
